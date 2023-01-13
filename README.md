@@ -8,3 +8,7 @@
 # Calculator Game
 
 <a href="https://asciinema.org/a/fYus1QxRmEzc1GQFGIBbcUZwW" target="_blank"><img src="https://asciinema.org/a/fYus1QxRmEzc1GQFGIBbcUZwW.svg" /></a>
+
+# Greatest Common Division Game
+
+<a href="https://asciinema.org/a/tqQE4qeRnBmWvWOqpEuQGluDR" target="_blank"><img src="https://asciinema.org/a/tqQE4qeRnBmWvWOqpEuQGluDR.svg" /></a>

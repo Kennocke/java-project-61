@@ -23,7 +23,8 @@ public class Engine {
             if (playerAnswer.equalsIgnoreCase(correctAnswer)) {
                 System.out.println("Correct!");
             } else {
-                System.out.printf("'%s' is wrong answer ;(. Correct answer was '%s'. Let's try again, %s!", playerAnswer, correctAnswer, playerName);
+                System.out.printf("'%s' is wrong answer ;(. Correct answer was '%s'. Let's try again, %s!",
+                        playerAnswer, correctAnswer, playerName);
                 return;
             }
         }
