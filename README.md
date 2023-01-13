@@ -4,3 +4,7 @@
 # Even Parity Game
 
 <a href="https://asciinema.org/a/dY2jBxXGQNRcKx7KvMfakVUcM" target="_blank"><img src="https://asciinema.org/a/dY2jBxXGQNRcKx7KvMfakVUcM.svg" /></a>
+
+# Calculator Game
+
+<a href="https://asciinema.org/a/fYus1QxRmEzc1GQFGIBbcUZwW" target="_blank"><img src="https://asciinema.org/a/fYus1QxRmEzc1GQFGIBbcUZwW.svg" /></a>
