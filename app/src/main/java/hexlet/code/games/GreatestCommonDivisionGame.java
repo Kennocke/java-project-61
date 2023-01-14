@@ -1,9 +1,9 @@
 package hexlet.code.games;
 
 import java.util.Arrays;
-import java.util.Random;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class GreatestCommonDivisionGame {
@@ -16,12 +16,11 @@ public class GreatestCommonDivisionGame {
     }
 
     public static String[][] generateQuestions(int questionsCount) {
-        Random rand = new Random();
         String[][] questions = new String[questionsCount][2];
 
         for (String[] question : questions) {
-            int firstNum = rand.nextInt(LOWER_BOUND, UPPER_BOUND);
-            int secondNum = rand.nextInt(LOWER_BOUND, UPPER_BOUND);
+            int firstNum = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
+            int secondNum = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
             String expression = firstNum + " " + secondNum;
             int correctAnswer = findGCD(firstNum, secondNum);
             question[0] = expression;

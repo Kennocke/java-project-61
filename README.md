@@ -12,3 +12,7 @@
 # Greatest Common Division Game
 
 <a href="https://asciinema.org/a/tqQE4qeRnBmWvWOqpEuQGluDR" target="_blank"><img src="https://asciinema.org/a/tqQE4qeRnBmWvWOqpEuQGluDR.svg" /></a>
+
+# Arithmetic Progression Game
+
+<a href="https://asciinema.org/a/5qF4it6XtX1zEPAdJ3DDeqhno" target="_blank"><img src="https://asciinema.org/a/5qF4it6XtX1zEPAdJ3DDeqhno.svg" /></a>

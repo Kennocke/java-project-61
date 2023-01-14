@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.games.ArithmeticProgressionGame;
 import hexlet.code.games.CalculatorGame;
 import hexlet.code.games.EvenParityGame;
 import hexlet.code.games.GreatestCommonDivisionGame;
@@ -14,6 +15,7 @@ public class App {
                 2 - Even
                 3 - Calc
                 4 - GCD
+                5 - Progression
                 0 - Exit
                 Your choice:\s"""
         );
@@ -25,6 +27,7 @@ public class App {
             case 2 -> EvenParityGame.play();
             case 3 -> CalculatorGame.play();
             case 4 -> GreatestCommonDivisionGame.play();
+            case 5 -> ArithmeticProgressionGame.play();
             default -> {
                 return;
             }

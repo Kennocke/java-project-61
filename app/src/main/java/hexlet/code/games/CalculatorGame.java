@@ -1,8 +1,7 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
-
-import java.util.Random;
+import hexlet.code.Utils;
 
 public class CalculatorGame extends Engine {
     static final String START_MESSAGE = "What is the result of the expression?";
@@ -19,13 +18,13 @@ public class CalculatorGame extends Engine {
     }
 
     public static String[][] generateQuestions(int questionsCount) throws Exception {
-        Random rand = new Random();
         String[][] questions = new String[questionsCount][2];
 
         for (String[] question : questions) {
-            int firstOperand = rand.nextInt(LOWER_BOUND, UPPER_BOUND);
-            int secondOperand = rand.nextInt(LOWER_BOUND, UPPER_BOUND);
-            String operand = OPERATORS[rand.nextInt(0, 2)];
+            int firstOperand = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
+            int secondOperand = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
+            int operatorsCount = OPERATORS.length;
+            String operand = OPERATORS[Utils.generateRandomInt(0, operatorsCount)];
 
             String expression;
             int correctAnswer;
