@@ -21,14 +21,14 @@ public class GreatestCommonDivisionGame {
             int firstNum = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
             int secondNum = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
             String expression = firstNum + " " + secondNum;
-            int correctAnswer = findGreatestCommonDivision(firstNum, secondNum);
+            int correctAnswer = getGBC(firstNum, secondNum);
             question[0] = expression;
             question[1] = Integer.toString(correctAnswer);
         }
 
         return questions;
     }
-    public static int findGreatestCommonDivision(int firstNum, int secondNum) {
+    public static int getGBC(int firstNum, int secondNum) {
         int[] divisorsFirstNum = getNumberDivisors(firstNum);
         int[] divisorsSecondNum = getNumberDivisors(secondNum);
         int[] leastArray = divisorsFirstNum.length > divisorsSecondNum.length ? divisorsFirstNum : divisorsSecondNum;
