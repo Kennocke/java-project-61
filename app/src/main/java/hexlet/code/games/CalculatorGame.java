@@ -3,7 +3,7 @@ package hexlet.code.games;
 import hexlet.code.Engine;
 import hexlet.code.Utils;
 
-public class CalculatorGame extends Engine {
+public class CalculatorGame {
     static final String START_MESSAGE = "What is the result of the expression?";
     static final int LOWER_BOUND = 0;
     static final int UPPER_BOUND = 50;
@@ -16,7 +16,6 @@ public class CalculatorGame extends Engine {
         String[][] questions = generateQuestions(Engine.QUESTIONS_COUNT);
         Engine.startGame(START_MESSAGE, questions);
     }
-
     public static String[][] generateQuestions(int questionsCount) throws Exception {
         String[][] questions = new String[questionsCount][2];
 

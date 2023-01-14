@@ -11,7 +11,6 @@ public class EvenParityGame {
         String[][] questions = generateQuestions(Engine.QUESTIONS_COUNT);
         Engine.startGame(START_MESSAGE, questions);
     }
-
     public static String[][] generateQuestions(int questionsCount) {
         String[][] questions = new String[questionsCount][2];
         for (String[] question : questions) {

@@ -9,7 +9,6 @@ public class ArithmeticProgressionGame {
     static final int UPPER_BOUND = 50;
     static final int MIN_SEQUENCE_LENGTH = 5;
     static final int MAX_SEQUENCE_LENGTH = 10;
-
     static final int MIN_STEP_LENGTH = 1;
     static final int MAX_STEP_LENGTH = 5;
     public static void play() {

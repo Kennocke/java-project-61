@@ -14,7 +14,6 @@ public class GreatestCommonDivisionGame {
         String[][] questions = generateQuestions(Engine.QUESTIONS_COUNT);
         Engine.startGame(START_MESSAGE, questions);
     }
-
     public static String[][] generateQuestions(int questionsCount) {
         String[][] questions = new String[questionsCount][2];
 
@@ -29,7 +28,6 @@ public class GreatestCommonDivisionGame {
 
         return questions;
     }
-
     public static int findGCD(int firstNum, int secondNum) {
         int[] divisorsFirstNum = getNumberDivisors(firstNum);
         int[] divisorsSecondNum = getNumberDivisors(secondNum);
@@ -45,7 +43,6 @@ public class GreatestCommonDivisionGame {
 
         return greatestCommonDivision;
     }
-
     public static int[] getNumberDivisors(int num) {
         int[] divisors = new int[num];
         int index = 0;
