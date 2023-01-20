@@ -12,13 +12,21 @@ public class EvenParityGame {
         Engine.startGame(START_MESSAGE, questions);
     }
     public static String[][] generateQuestions(int questionsCount) {
+        String[][] questions = createQuestions(questionsCount);
+        fillCorrectAnswer(questions);
+        return questions;
+    }
+    public static String[][] createQuestions(int questionsCount) {
         String[][] questions = new String[questionsCount][2];
         for (String[] question : questions) {
             int randomNumber = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
-            String correctAnswer = randomNumber % 2 == 0 ? "yes" : "no";
             question[0] = Integer.toString(randomNumber);
-            question[1] = correctAnswer;
         }
         return questions;
+    }
+    public static void fillCorrectAnswer(String[][] questions) {
+        for (String[] question: questions) {
+            question[1] = Integer.parseInt(question[0]) % 2 == 0 ? "yes" : "no";
+        }
     }
 }

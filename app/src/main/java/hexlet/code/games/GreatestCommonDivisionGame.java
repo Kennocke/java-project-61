@@ -15,18 +15,28 @@ public class GreatestCommonDivisionGame {
         Engine.startGame(START_MESSAGE, questions);
     }
     public static String[][] generateQuestions(int questionsCount) {
+        String[][] questions = createQuestions(questionsCount);
+        fillCorrectAnswers(questions);
+        return questions;
+    }
+    public static String[][] createQuestions(int questionsCount) {
         String[][] questions = new String[questionsCount][2];
 
         for (String[] question : questions) {
             int firstNum = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
             int secondNum = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
-            String expression = firstNum + " " + secondNum;
-            int correctAnswer = getGBC(firstNum, secondNum);
-            question[0] = expression;
-            question[1] = Integer.toString(correctAnswer);
+            question[0] = firstNum + " " + secondNum;
         }
 
         return questions;
+    }
+    public static void fillCorrectAnswers(String[][] questions) {
+        for (String[] question: questions) {
+            String[] expressionParts = question[0].split(" ");
+            int firstNum = Integer.parseInt(expressionParts[0]);
+            int secondNum = Integer.parseInt(expressionParts[1]);
+            question[1] = Integer.toString(getGBC(firstNum, secondNum));
+        }
     }
     public static int getGBC(int firstNum, int secondNum) {
         int[] divisorsFirstNum = getNumberDivisors(firstNum);

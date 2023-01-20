@@ -6,18 +6,12 @@ import hexlet.code.games.GreatestCommonDivisionGame;
 import hexlet.code.games.ArithmeticProgressionGame;
 import hexlet.code.games.EvenParityGame;
 
+import hexlet.code.Constants.Games;
+import static hexlet.code.Utils.getNameGame;
+
 import java.util.Scanner;
 public class App {
-    enum Games {
-        Exit,
-        Greet,
-        Even,
-        Calc,
-        GCD,
-        Progression,
-        Prime
-    }
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.out.print(
             """
                 Please enter the game number and press Enter.
@@ -32,7 +26,7 @@ public class App {
         );
         Scanner sc = new Scanner(System.in);
         int gameNumber = Integer.parseInt(sc.next());
-        Games gameName = getNameGame(gameNumber);
+        Games gameName = getNameGame(Games.values(), gameNumber);
 
         switch (gameName) {
             case Greet -> Cli.greet();
@@ -45,13 +39,5 @@ public class App {
                 return;
             }
         }
-    }
-    public static Games getNameGame(int gameNumber) throws Exception {
-        Games[] games = Games.values();
-        if (gameNumber < 0 || gameNumber >= games.length) {
-            throw new Exception("Unknown game");
-        }
-
-        return games[gameNumber];
     }
 }

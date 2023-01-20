@@ -12,42 +12,59 @@ public class CalculatorGame {
         "Minus",
         "Multiply"
     };
-    public static void play() throws Exception {
+    public static void play() {
         String[][] questions = generateQuestions(Engine.QUESTIONS_COUNT);
         Engine.startGame(START_MESSAGE, questions);
     }
-    public static String[][] generateQuestions(int questionsCount) throws Exception {
+    public static String[][] generateQuestions(int questionsCount) {
+        String[][] questions = createQuestions(questionsCount);
+        fillCorrectAnswers(questions);
+        return questions;
+    }
+    public static String[][] createQuestions(int questionsCount) {
         String[][] questions = new String[questionsCount][2];
 
         for (String[] question : questions) {
             int firstOperand = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
             int secondOperand = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
             int operatorsCount = OPERATORS.length;
-            String operand = OPERATORS[Utils.generateRandomInt(0, operatorsCount)];
+            String operator = OPERATORS[Utils.generateRandomInt(0, operatorsCount)];
 
-            String expression;
-            int correctAnswer;
-
-            switch (operand) {
+            switch (operator) {
                 case "Plus" -> {
-                    expression = firstOperand + " + " + secondOperand;
-                    correctAnswer = firstOperand + secondOperand;
+                    question[0] = firstOperand + " + " + secondOperand;
                 }
                 case "Minus" -> {
-                    expression = firstOperand + " - " + secondOperand;
-                    correctAnswer = firstOperand - secondOperand;
+                    question[0] = firstOperand + " - " + secondOperand;
                 }
                 case "Multiply" -> {
-                    expression = firstOperand + " * " + secondOperand;
-                    correctAnswer = firstOperand * secondOperand;
+                    question[0] = firstOperand + " * " + secondOperand;
                 }
-                default -> throw new Exception("Unknown operation");
+                default -> throw new RuntimeException("Unknown operation");
             }
-
-            question[0] = expression;
-            question[1] = Integer.toString(correctAnswer);
         }
 
         return questions;
+    }
+    public static void fillCorrectAnswers(String[][] questions) {
+        for (String[] question : questions) {
+            String[] expressionParts = question[0].split(" ");
+            int firstOperand = Integer.parseInt(expressionParts[0]);
+            int secondOperand = Integer.parseInt(expressionParts[2]);
+            String operator = expressionParts[1];
+
+            switch (operator) {
+                case "+" -> {
+                    question[1] = Integer.toString(firstOperand + secondOperand);
+                }
+                case "-" -> {
+                    question[1] = Integer.toString(firstOperand - secondOperand);
+                }
+                case "*" -> {
+                    question[1] = Integer.toString(firstOperand * secondOperand);
+                }
+                default -> throw new RuntimeException("Unknown operation");
+            }
+        }
     }
 }

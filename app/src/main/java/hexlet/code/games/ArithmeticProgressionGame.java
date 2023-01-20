@@ -2,6 +2,7 @@ package hexlet.code.games;
 
 import hexlet.code.Engine;
 import hexlet.code.Utils;
+import org.apache.commons.lang3.ArrayUtils;
 
 public class ArithmeticProgressionGame {
     static final String START_MESSAGE = "What number is missing in the progression?";
@@ -16,6 +17,11 @@ public class ArithmeticProgressionGame {
         Engine.startGame(START_MESSAGE, questions);
     }
     public static String[][] generateQuestions(int questionsCount) {
+        String[][] questions = createQuestions(questionsCount);
+        fillCorrectAnswers(questions);
+        return questions;
+    }
+    public static String[][] createQuestions(int questionsCount) {
         String[][] questions = new String[questionsCount][2];
 
         for (String[] question : questions) {
@@ -29,12 +35,36 @@ public class ArithmeticProgressionGame {
                 sequenceElement += stepLength;
             }
 
-            String correctAnswer = sequence[Utils.generateRandomInt(0, sequenceLength)];
-            String expression = String.join(" ", sequence).replace(correctAnswer, "..");
-            question[0] = expression;
-            question[1] = correctAnswer;
+            String hiddenNumber = sequence[Utils.generateRandomInt(0, sequenceLength)];
+            question[0] = String.join(" ", sequence).replace(hiddenNumber, "..");
         }
 
         return questions;
+    }
+    public static void fillCorrectAnswers(String[][] questions) {
+        for (String[] question : questions) {
+            String[] sequence = question[0].split(" ");
+
+            if (sequence.length < 3) {
+                throw new RuntimeException("Not enough data for detecting correct answer");
+            }
+
+            int unknownElementIndex = ArrayUtils.indexOf(sequence, "..");
+            int sequenceStep;
+            if (unknownElementIndex == 0) {
+                sequenceStep = Integer.parseInt(sequence[unknownElementIndex + 2])
+                        - Integer.parseInt(sequence[unknownElementIndex + 1]);
+                question[1] = Integer.toString(Integer.parseInt(sequence[unknownElementIndex + 1])
+                        - sequenceStep);
+            } else if (unknownElementIndex + 1 == sequence.length) {
+                sequenceStep = Integer.parseInt(sequence[unknownElementIndex - 1])
+                        - Integer.parseInt(sequence[unknownElementIndex - 2]);
+                question[1] = Integer.toString(Integer.parseInt(sequence[unknownElementIndex - 1]) + sequenceStep);
+            } else {
+                sequenceStep = (Integer.parseInt(sequence[unknownElementIndex + 1])
+                        - Integer.parseInt(sequence[unknownElementIndex - 1])) / 2;
+                question[1] = Integer.toString(Integer.parseInt(sequence[unknownElementIndex - 1]) + sequenceStep);
+            }
+        }
     }
 }
