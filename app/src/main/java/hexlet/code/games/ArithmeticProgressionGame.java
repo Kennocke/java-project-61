@@ -44,11 +44,6 @@ public class ArithmeticProgressionGame {
     public static void fillCorrectAnswers(String[][] questions) {
         for (String[] question : questions) {
             String[] sequence = question[0].split(" ");
-            int minNumberForDetectingAnswer = 3;
-
-            if (sequence.length < minNumberForDetectingAnswer) {
-                throw new RuntimeException("Not enough data for detecting correct answer");
-            }
 
             int unknownElementIndex = ArrayUtils.indexOf(sequence, "..");
             int sequenceStep;
