@@ -30,14 +30,13 @@ public class CalculatorGame {
         int secondOperand = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
         int operatorsCount = OPERATORS.length;
         String operator = OPERATORS[Utils.generateRandomInt(0, operatorsCount)];
-        String question;
 
-        switch (operator) {
-            case "Plus" -> question = firstOperand + " + " + secondOperand;
-            case "Minus" -> question = firstOperand + " - " + secondOperand;
-            case "Multiply" -> question = firstOperand + " * " + secondOperand;
+        String question = switch (operator) {
+            case "Plus" -> firstOperand + " + " + secondOperand;
+            case "Minus" -> firstOperand + " - " + secondOperand;
+            case "Multiply" -> firstOperand + " * " + secondOperand;
             default -> throw new RuntimeException("Unknown operation");
-        }
+        };
 
         String correctAnswer = getCorrectAnswer(question);
         roundData[0] = question;
@@ -48,14 +47,13 @@ public class CalculatorGame {
         int firstOperand = Integer.parseInt(expressionParts[0]);
         int secondOperand = Integer.parseInt(expressionParts[2]);
         String operator = expressionParts[1];
-        String correctAnswer;
 
-        switch (operator) {
-            case "+" -> correctAnswer = Integer.toString(firstOperand + secondOperand);
-            case "-" -> correctAnswer = Integer.toString(firstOperand - secondOperand);
-            case "*" -> correctAnswer = Integer.toString(firstOperand * secondOperand);
+        String correctAnswer = switch (operator) {
+            case "+" -> Integer.toString(firstOperand + secondOperand);
+            case "-" -> Integer.toString(firstOperand - secondOperand);
+            case "*" -> Integer.toString(firstOperand * secondOperand);
             default -> throw new RuntimeException("Unknown operation");
-        }
+        };
 
         return correctAnswer;
     }
