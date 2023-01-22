@@ -8,25 +8,23 @@ public class EvenParityGame {
     static final int LOWER_BOUND = 0;
     static final int UPPER_BOUND = 50;
     public static void play() {
-        String[][] questions = generateQuestions(Engine.QUESTIONS_COUNT);
-        Engine.startGame(START_MESSAGE, questions);
+        String[][] gameData = generateGameData(Engine.ROUNDS_COUNT);
+        Engine.startGame(START_MESSAGE, gameData);
     }
-    public static String[][] generateQuestions(int questionsCount) {
-        String[][] questions = createQuestions(questionsCount);
-        fillCorrectAnswer(questions);
-        return questions;
-    }
-    public static String[][] createQuestions(int questionsCount) {
-        String[][] questions = new String[questionsCount][2];
-        for (String[] question : questions) {
-            int randomNumber = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
-            question[0] = Integer.toString(randomNumber);
+    private static String[][] generateGameData(int roundsCount) {
+        String[][] gameData = new String[roundsCount][2];
+        for (String[] roundData : gameData) {
+            generateRoundData(roundData);
         }
-        return questions;
+        return gameData;
     }
-    public static void fillCorrectAnswer(String[][] questions) {
-        for (String[] question: questions) {
-            question[1] = Integer.parseInt(question[0]) % 2 == 0 ? "yes" : "no";
-        }
+    private static void generateRoundData(String[] roundData) {
+        String question = Integer.toString(Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND));
+        String correctAnswer = getCorrectAnswer(question);
+        roundData[0] = question;
+        roundData[1] = correctAnswer;
+    }
+    private static String getCorrectAnswer(String question) {
+        return Integer.parseInt(question) % 2 == 0 ? "yes" : "no";
     }
 }

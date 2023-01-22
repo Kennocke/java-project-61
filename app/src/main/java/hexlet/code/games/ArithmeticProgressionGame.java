@@ -13,54 +13,56 @@ public class ArithmeticProgressionGame {
     static final int MIN_STEP_LENGTH = 1;
     static final int MAX_STEP_LENGTH = 5;
     public static void play() {
-        String[][] questions = generateQuestions(Engine.QUESTIONS_COUNT);
-        Engine.startGame(START_MESSAGE, questions);
+        String[][] gameData = generateGameData(Engine.ROUNDS_COUNT);
+        Engine.startGame(START_MESSAGE, gameData);
     }
-    public static String[][] generateQuestions(int questionsCount) {
-        String[][] questions = createQuestions(questionsCount);
-        fillCorrectAnswers(questions);
-        return questions;
-    }
-    public static String[][] createQuestions(int questionsCount) {
-        String[][] questions = new String[questionsCount][2];
+    private static String[][] generateGameData(int roundsCount) {
+        String[][] gameData = new String[roundsCount][2];
 
-        for (String[] question : questions) {
-            int sequenceElement = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
-            int sequenceLength = Utils.generateRandomInt(MIN_SEQUENCE_LENGTH, MAX_SEQUENCE_LENGTH);
-            int stepLength = Utils.generateRandomInt(MIN_STEP_LENGTH, MAX_STEP_LENGTH);
-            String[] sequence = new String[sequenceLength];
-
-            for (int i = 0; i < sequenceLength; i++) {
-                sequence[i] = Integer.toString(sequenceElement);
-                sequenceElement += stepLength;
-            }
-
-            String hiddenNumber = sequence[Utils.generateRandomInt(0, sequenceLength)];
-            question[0] = String.join(" ", sequence).replace(hiddenNumber, "..");
+        for (String[] roundData : gameData) {
+            generateRoundData(roundData);
         }
 
-        return questions;
+        return gameData;
     }
-    public static void fillCorrectAnswers(String[][] questions) {
-        for (String[] question : questions) {
-            String[] sequence = question[0].split(" ");
+    private static void generateRoundData(String[] roundData) {
+        int sequenceElement = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
+        int sequenceLength = Utils.generateRandomInt(MIN_SEQUENCE_LENGTH, MAX_SEQUENCE_LENGTH);
+        int stepLength = Utils.generateRandomInt(MIN_STEP_LENGTH, MAX_STEP_LENGTH);
+        String[] sequence = new String[sequenceLength];
 
-            int unknownElementIndex = ArrayUtils.indexOf(sequence, "..");
-            int sequenceStep;
-            if (unknownElementIndex == 0) {
-                sequenceStep = Integer.parseInt(sequence[unknownElementIndex + 2])
-                        - Integer.parseInt(sequence[unknownElementIndex + 1]);
-                question[1] = Integer.toString(Integer.parseInt(sequence[unknownElementIndex + 1])
-                        - sequenceStep);
-            } else if (unknownElementIndex + 1 == sequence.length) {
-                sequenceStep = Integer.parseInt(sequence[unknownElementIndex - 1])
-                        - Integer.parseInt(sequence[unknownElementIndex - 2]);
-                question[1] = Integer.toString(Integer.parseInt(sequence[unknownElementIndex - 1]) + sequenceStep);
-            } else {
-                sequenceStep = (Integer.parseInt(sequence[unknownElementIndex + 1])
-                        - Integer.parseInt(sequence[unknownElementIndex - 1])) / 2;
-                question[1] = Integer.toString(Integer.parseInt(sequence[unknownElementIndex - 1]) + sequenceStep);
-            }
+        for (int i = 0; i < sequenceLength; i++) {
+            sequence[i] = Integer.toString(sequenceElement);
+            sequenceElement += stepLength;
         }
+
+        String hiddenNumber = sequence[Utils.generateRandomInt(0, sequenceLength)];
+        String question = String.join(" ", sequence).replace(hiddenNumber, "..");
+        String correctAnswer = getCorrectAnswer(question);
+        roundData[0] = question;
+        roundData[1] = correctAnswer;
+    }
+    private static String getCorrectAnswer(String question) {
+        String[] sequence = question.split(" ");
+        int unknownElementIndex = ArrayUtils.indexOf(sequence, "..");
+        String correctAnswer;
+        int sequenceStep;
+
+        if (unknownElementIndex == 0) {
+            sequenceStep = Integer.parseInt(sequence[unknownElementIndex + 2])
+                    - Integer.parseInt(sequence[unknownElementIndex + 1]);
+            correctAnswer = Integer.toString(Integer.parseInt(sequence[unknownElementIndex + 1])
+                    - sequenceStep);
+        } else if (unknownElementIndex + 1 == sequence.length) {
+            sequenceStep = Integer.parseInt(sequence[unknownElementIndex - 1])
+                    - Integer.parseInt(sequence[unknownElementIndex - 2]);
+            correctAnswer = Integer.toString(Integer.parseInt(sequence[unknownElementIndex - 1]) + sequenceStep);
+        } else {
+            sequenceStep = (Integer.parseInt(sequence[unknownElementIndex + 1])
+                    - Integer.parseInt(sequence[unknownElementIndex - 1])) / 2;
+            correctAnswer = Integer.toString(Integer.parseInt(sequence[unknownElementIndex - 1]) + sequenceStep);
+        }
+
+        return correctAnswer;
     }
 }

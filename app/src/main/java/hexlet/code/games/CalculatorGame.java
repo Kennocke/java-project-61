@@ -13,58 +13,50 @@ public class CalculatorGame {
         "Multiply"
     };
     public static void play() {
-        String[][] questions = generateQuestions(Engine.QUESTIONS_COUNT);
-        Engine.startGame(START_MESSAGE, questions);
+        String[][] gameData = generateGameData(Engine.ROUNDS_COUNT);
+        Engine.startGame(START_MESSAGE, gameData);
     }
-    public static String[][] generateQuestions(int questionsCount) {
-        String[][] questions = createQuestions(questionsCount);
-        fillCorrectAnswers(questions);
-        return questions;
-    }
-    public static String[][] createQuestions(int questionsCount) {
-        String[][] questions = new String[questionsCount][2];
+    private static String[][] generateGameData(int roundsCount) {
+        String[][] gameData = new String[roundsCount][2];
 
-        for (String[] question : questions) {
-            int firstOperand = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
-            int secondOperand = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
-            int operatorsCount = OPERATORS.length;
-            String operator = OPERATORS[Utils.generateRandomInt(0, operatorsCount)];
-
-            switch (operator) {
-                case "Plus" -> {
-                    question[0] = firstOperand + " + " + secondOperand;
-                }
-                case "Minus" -> {
-                    question[0] = firstOperand + " - " + secondOperand;
-                }
-                case "Multiply" -> {
-                    question[0] = firstOperand + " * " + secondOperand;
-                }
-                default -> throw new RuntimeException("Unknown operation");
-            }
+        for (String[] roundData : gameData) {
+            generateRoundData(roundData);
         }
 
-        return questions;
+        return gameData;
     }
-    public static void fillCorrectAnswers(String[][] questions) {
-        for (String[] question : questions) {
-            String[] expressionParts = question[0].split(" ");
-            int firstOperand = Integer.parseInt(expressionParts[0]);
-            int secondOperand = Integer.parseInt(expressionParts[2]);
-            String operator = expressionParts[1];
+    private static void generateRoundData(String[] roundData) {
+        int firstOperand = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
+        int secondOperand = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
+        int operatorsCount = OPERATORS.length;
+        String operator = OPERATORS[Utils.generateRandomInt(0, operatorsCount)];
+        String question;
 
-            switch (operator) {
-                case "+" -> {
-                    question[1] = Integer.toString(firstOperand + secondOperand);
-                }
-                case "-" -> {
-                    question[1] = Integer.toString(firstOperand - secondOperand);
-                }
-                case "*" -> {
-                    question[1] = Integer.toString(firstOperand * secondOperand);
-                }
-                default -> throw new RuntimeException("Unknown operation");
-            }
+        switch (operator) {
+            case "Plus" -> question = firstOperand + " + " + secondOperand;
+            case "Minus" -> question = firstOperand + " - " + secondOperand;
+            case "Multiply" -> question = firstOperand + " * " + secondOperand;
+            default -> throw new RuntimeException("Unknown operation");
         }
+
+        String correctAnswer = getCorrectAnswer(question);
+        roundData[0] = question;
+        roundData[1] = correctAnswer;
+    }
+    private static String getCorrectAnswer(String question) {
+        String[] expressionParts = question.split(" ");
+        int firstOperand = Integer.parseInt(expressionParts[0]);
+        int secondOperand = Integer.parseInt(expressionParts[2]);
+        String operator = expressionParts[1];
+        String correctAnswer;
+
+        switch (operator) {
+            case "+" -> correctAnswer = Integer.toString(firstOperand + secondOperand);
+            case "-" -> correctAnswer = Integer.toString(firstOperand - secondOperand);
+            case "*" -> correctAnswer = Integer.toString(firstOperand * secondOperand);
+            default -> throw new RuntimeException("Unknown operation");
+        }
+
+        return correctAnswer;
     }
 }

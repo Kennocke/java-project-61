@@ -8,31 +8,30 @@ public class PrimeNumberGame {
     static final int LOWER_BOUND = 2;
     static final int UPPER_BOUND = 100;
     public static void play() {
-        String[][] questions = generateQuestions(Engine.QUESTIONS_COUNT);
-        Engine.startGame(START_MESSAGE, questions);
+        String[][] gameData = generateQuestions(Engine.ROUNDS_COUNT);
+        Engine.startGame(START_MESSAGE, gameData);
     }
-    public static String[][] generateQuestions(int questionsCount) {
-        String[][] questions = createQuestions(questionsCount);
-        fillCorrectAnswers(questions);
-        return questions;
-    }
-    public static String[][] createQuestions(int questionsCount) {
-        String[][] questions = new String[questionsCount][2];
+    private static String[][] generateQuestions(int roundsCount) {
+        String[][] gameData = new String[roundsCount][2];
 
-        for (String[] question : questions) {
-            int randomNumber = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
-            question[0] = Integer.toString(randomNumber);
+        for (String[] roundData : gameData) {
+            generateRoundData(roundData);
         }
 
-        return questions;
+        return gameData;
     }
-    public static void fillCorrectAnswers(String[][] questions) {
-        for (String[] question: questions) {
-            int numberForCheck = Integer.parseInt(question[0]);
-            question[1] = checkPrimeNumber(numberForCheck) ? "yes" : "no";
-        }
+    private static void generateRoundData(String[] roundData) {
+        int randomNumber = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
+        String question = Integer.toString(randomNumber);
+        String correctAnswer = getCorrectAnswer(question);
+        roundData[0] = question;
+        roundData[1] = correctAnswer;
     }
-    public static boolean checkPrimeNumber(int number) {
+    private static String getCorrectAnswer(String question) {
+        int numberForCheck = Integer.parseInt(question);
+        return checkPrimeNumber(numberForCheck) ? "yes" : "no";
+    }
+    private static boolean checkPrimeNumber(int number) {
         if (number == 0 || number == 1) {
             return false;
         }
