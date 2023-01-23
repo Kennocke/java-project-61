@@ -30,7 +30,7 @@ public class CalculatorGame {
         int secondOperand = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
         int operatorsCount = OPERATORS.length;
         String operator = OPERATORS[Utils.generateRandomInt(0, operatorsCount)];
-        String question = String.format("%d %d %d", firstOperand, operator, secondOperand);
+        String question = String.format("%s %s %s", firstOperand, operator, secondOperand);
         String correctAnswer = getCorrectAnswer(question);
         roundData[0] = question;
         roundData[1] = correctAnswer;
