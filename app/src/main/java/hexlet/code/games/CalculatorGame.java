@@ -8,9 +8,9 @@ public class CalculatorGame {
     static final int LOWER_BOUND = 0;
     static final int UPPER_BOUND = 50;
     static final String[] OPERATORS = new String[] {
-        "Plus",
-        "Minus",
-        "Multiply"
+        "+",
+        "-",
+        "*"
     };
     public static void play() {
         String[][] gameData = generateGameData(Engine.ROUNDS_COUNT);
@@ -30,14 +30,7 @@ public class CalculatorGame {
         int secondOperand = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
         int operatorsCount = OPERATORS.length;
         String operator = OPERATORS[Utils.generateRandomInt(0, operatorsCount)];
-
-        String question = switch (operator) {
-            case "Plus" -> firstOperand + " + " + secondOperand;
-            case "Minus" -> firstOperand + " - " + secondOperand;
-            case "Multiply" -> firstOperand + " * " + secondOperand;
-            default -> throw new RuntimeException("Unknown operation");
-        };
-
+        String question = String.format("%d %d %d", firstOperand, operator, secondOperand);
         String correctAnswer = getCorrectAnswer(question);
         roundData[0] = question;
         roundData[1] = correctAnswer;
