@@ -29,9 +29,9 @@ public class PrimeNumberGame {
     }
     private static String getCorrectAnswer(String question) {
         int numberForCheck = Integer.parseInt(question);
-        return checkPrimeNumber(numberForCheck) ? "yes" : "no";
+        return isPrime(numberForCheck) ? "yes" : "no";
     }
-    private static boolean checkPrimeNumber(int number) {
+    private static boolean isPrime(int number) {
         if (number == 0 || number == 1) {
             return false;
         }

@@ -31,23 +31,16 @@ public class CalculatorGame {
         int operatorsCount = OPERATORS.length;
         String operator = OPERATORS[Utils.generateRandomInt(0, operatorsCount)];
         String question = String.format("%s %s %s", firstOperand, operator, secondOperand);
-        String correctAnswer = getCorrectAnswer(question);
+        String correctAnswer = getCorrectAnswer(firstOperand, secondOperand, operator);
         roundData[0] = question;
         roundData[1] = correctAnswer;
     }
-    private static String getCorrectAnswer(String question) {
-        String[] expressionParts = question.split(" ");
-        int firstOperand = Integer.parseInt(expressionParts[0]);
-        int secondOperand = Integer.parseInt(expressionParts[2]);
-        String operator = expressionParts[1];
-
-        String correctAnswer = switch (operator) {
+    private static String getCorrectAnswer(int firstOperand, int secondOperand, String operator) {
+        return switch (operator) {
             case "+" -> Integer.toString(firstOperand + secondOperand);
             case "-" -> Integer.toString(firstOperand - secondOperand);
             case "*" -> Integer.toString(firstOperand * secondOperand);
             default -> throw new RuntimeException("Unknown operation");
         };
-
-        return correctAnswer;
     }
 }

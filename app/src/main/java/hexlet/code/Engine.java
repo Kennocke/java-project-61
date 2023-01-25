@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Engine {
     public static final int ROUNDS_COUNT = 3;
-    public static void startGame(String startMessage, String[][] questions) {
+    public static void startGame(String startMessage, String[][] gameData) {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Welcome to the Brain Games!");
@@ -13,11 +13,11 @@ public class Engine {
         System.out.printf("Hello, %s!\n",  playerName);
 
         System.out.println(startMessage);
-        for (String[] question : questions) {
-            String expression = question[0];
-            String correctAnswer = question[1];
+        for (String[] roundData : gameData) {
+            String question = roundData[0];
+            String correctAnswer = roundData[1];
 
-            System.out.println("Question: " + expression);
+            System.out.println("Question: " + question);
             String playerAnswer = sc.next();
 
             if (playerAnswer.equalsIgnoreCase(correctAnswer)) {
@@ -30,5 +30,6 @@ public class Engine {
         }
 
         System.out.format("Congratulations, %s!", playerName);
+        sc.close();
     }
 }

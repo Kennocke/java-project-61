@@ -39,5 +39,7 @@ public class App {
                 return;
             }
         }
+
+        sc.close();
     }
 }

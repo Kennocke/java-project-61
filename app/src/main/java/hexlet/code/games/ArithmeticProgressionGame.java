@@ -2,7 +2,6 @@ package hexlet.code.games;
 
 import hexlet.code.Engine;
 import hexlet.code.Utils;
-import org.apache.commons.lang3.ArrayUtils;
 
 public class ArithmeticProgressionGame {
     static final String START_MESSAGE = "What number is missing in the progression?";
@@ -38,31 +37,8 @@ public class ArithmeticProgressionGame {
 
         String hiddenNumber = sequence[Utils.generateRandomInt(0, sequenceLength)];
         String question = String.join(" ", sequence).replace(hiddenNumber, "..");
-        String correctAnswer = getCorrectAnswer(question);
+        String correctAnswer = hiddenNumber;
         roundData[0] = question;
         roundData[1] = correctAnswer;
-    }
-    private static String getCorrectAnswer(String question) {
-        String[] sequence = question.split(" ");
-        int unknownElementIndex = ArrayUtils.indexOf(sequence, "..");
-        String correctAnswer;
-        int sequenceStep;
-
-        if (unknownElementIndex == 0) {
-            sequenceStep = Integer.parseInt(sequence[unknownElementIndex + 2])
-                    - Integer.parseInt(sequence[unknownElementIndex + 1]);
-            correctAnswer = Integer.toString(Integer.parseInt(sequence[unknownElementIndex + 1])
-                    - sequenceStep);
-        } else if (unknownElementIndex + 1 == sequence.length) {
-            sequenceStep = Integer.parseInt(sequence[unknownElementIndex - 1])
-                    - Integer.parseInt(sequence[unknownElementIndex - 2]);
-            correctAnswer = Integer.toString(Integer.parseInt(sequence[unknownElementIndex - 1]) + sequenceStep);
-        } else {
-            sequenceStep = (Integer.parseInt(sequence[unknownElementIndex + 1])
-                    - Integer.parseInt(sequence[unknownElementIndex - 1])) / 2;
-            correctAnswer = Integer.toString(Integer.parseInt(sequence[unknownElementIndex - 1]) + sequenceStep);
-        }
-
-        return correctAnswer;
     }
 }
