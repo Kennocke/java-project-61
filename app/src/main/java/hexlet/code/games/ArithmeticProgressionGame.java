@@ -36,9 +36,10 @@ public class ArithmeticProgressionGame {
             sequenceElement += stepLength;
         }
 
-        String hiddenNumber = sequence[Utils.generateRandomInt(0, sequenceLength)];
-        String question = String.join(" ", sequence).replace(hiddenNumber, "..");
-        String correctAnswer = hiddenNumber;
+        int hiddenNumberIndex = Utils.generateRandomInt(0, sequenceLength);
+        String correctAnswer = sequence[hiddenNumberIndex];
+        sequence[hiddenNumberIndex] = "..";
+        String question = String.join(" ", sequence);
         roundData[0] = question;
         roundData[1] = correctAnswer;
 
