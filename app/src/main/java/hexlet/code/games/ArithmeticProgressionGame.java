@@ -18,13 +18,14 @@ public class ArithmeticProgressionGame {
     private static String[][] generateGameData(int roundsCount) {
         String[][] gameData = new String[roundsCount][2];
 
-        for (String[] roundData : gameData) {
-            generateRoundData(roundData);
+        for (int i = 0; i < gameData.length; i++) {
+            gameData[i] = generateRoundData();
         }
 
         return gameData;
     }
-    private static void generateRoundData(String[] roundData) {
+    private static String[] generateRoundData() {
+        String[] roundData = new String[2];
         int sequenceElement = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
         int sequenceLength = Utils.generateRandomInt(MIN_SEQUENCE_LENGTH, MAX_SEQUENCE_LENGTH);
         int stepLength = Utils.generateRandomInt(MIN_STEP_LENGTH, MAX_STEP_LENGTH);
@@ -40,5 +41,7 @@ public class ArithmeticProgressionGame {
         String correctAnswer = hiddenNumber;
         roundData[0] = question;
         roundData[1] = correctAnswer;
+
+        return roundData;
     }
 }

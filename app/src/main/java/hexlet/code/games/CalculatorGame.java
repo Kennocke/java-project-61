@@ -19,13 +19,14 @@ public class CalculatorGame {
     private static String[][] generateGameData(int roundsCount) {
         String[][] gameData = new String[roundsCount][2];
 
-        for (String[] roundData : gameData) {
-            generateRoundData(roundData);
+        for (int i = 0; i < gameData.length; i++) {
+            gameData[i] = generateRoundData();
         }
 
         return gameData;
     }
-    private static void generateRoundData(String[] roundData) {
+    private static String[] generateRoundData() {
+        String[] roundData = new String[2];
         int firstOperand = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
         int secondOperand = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
         int operatorsCount = OPERATORS.length;
@@ -34,6 +35,8 @@ public class CalculatorGame {
         String correctAnswer = getCorrectAnswer(firstOperand, secondOperand, operator);
         roundData[0] = question;
         roundData[1] = correctAnswer;
+
+        return roundData;
     }
     private static String getCorrectAnswer(int firstOperand, int secondOperand, String operator) {
         return switch (operator) {

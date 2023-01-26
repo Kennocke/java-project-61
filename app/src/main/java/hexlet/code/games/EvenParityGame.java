@@ -13,18 +13,26 @@ public class EvenParityGame {
     }
     private static String[][] generateGameData(int roundsCount) {
         String[][] gameData = new String[roundsCount][2];
-        for (String[] roundData : gameData) {
-            generateRoundData(roundData);
+
+        for (int i = 0; i < gameData.length; i++) {
+            gameData[i] = generateRoundData();
         }
+
         return gameData;
     }
-    private static void generateRoundData(String[] roundData) {
+    private static String[] generateRoundData() {
+        String[] roundData = new String[2];
         String question = Integer.toString(Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND));
         String correctAnswer = getCorrectAnswer(question);
         roundData[0] = question;
         roundData[1] = correctAnswer;
+
+        return roundData;
     }
     private static String getCorrectAnswer(String question) {
-        return Integer.parseInt(question) % 2 == 0 ? "yes" : "no";
+        return isEven(Integer.parseInt(question)) ? "yes" : "no";
+    }
+    private static Boolean isEven(int number) {
+        return number % 2 == 0;
     }
 }

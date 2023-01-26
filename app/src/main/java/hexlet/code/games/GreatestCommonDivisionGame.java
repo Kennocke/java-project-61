@@ -14,19 +14,22 @@ public class GreatestCommonDivisionGame {
     public static String[][] generateGameData(int roundsCount) {
         String[][] gameData = new String[roundsCount][2];
 
-        for (String[] roundData : gameData) {
-            generateRoundData(roundData);
+        for (int i = 0; i < gameData.length; i++) {
+            gameData[i] = generateRoundData();
         }
 
         return gameData;
     }
-    private static void generateRoundData(String[] roundData) {
+    private static String[] generateRoundData() {
+        String[] roundData = new String[2];
         int firstNum = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
         int secondNum = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
         String question = firstNum + " " + secondNum;
         String correctAnswer = Integer.toString(getGBC(firstNum, secondNum));
         roundData[0] = question;
         roundData[1] = correctAnswer;
+
+        return roundData;
     }
     private static int getGBC(int firstNum, int secondNum) {
         int firsNumber = firstNum;

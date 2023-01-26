@@ -14,22 +14,24 @@ public class PrimeNumberGame {
     private static String[][] generateQuestions(int roundsCount) {
         String[][] gameData = new String[roundsCount][2];
 
-        for (String[] roundData : gameData) {
-            generateRoundData(roundData);
+        for (int i = 0; i < gameData.length; i++) {
+            gameData[i] = generateRoundData();
         }
 
         return gameData;
     }
-    private static void generateRoundData(String[] roundData) {
+    private static String[] generateRoundData() {
+        String[] roundData = new String[2];
         int randomNumber = Utils.generateRandomInt(LOWER_BOUND, UPPER_BOUND);
         String question = Integer.toString(randomNumber);
         String correctAnswer = getCorrectAnswer(question);
         roundData[0] = question;
         roundData[1] = correctAnswer;
+
+        return roundData;
     }
     private static String getCorrectAnswer(String question) {
-        int numberForCheck = Integer.parseInt(question);
-        return isPrime(numberForCheck) ? "yes" : "no";
+        return isPrime(Integer.parseInt(question)) ? "yes" : "no";
     }
     private static boolean isPrime(int number) {
         if (number == 0 || number == 1) {
